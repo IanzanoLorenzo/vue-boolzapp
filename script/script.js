@@ -170,28 +170,6 @@ createApp({
                             status: 'received',
                         }
                     ],
-                },
-                {
-                    name: 'Spaccino',
-                    avatar: './img/avatar_1.jpg',
-                    visible: true,
-                    messages: [
-                        {
-                            date: '10/01/2020 15:30:55',
-                            message: 'Hai la droga ziopera?',
-                            status: 'sent',
-                        },
-                        {
-                            date: '10/01/2020 15:50:00',
-                            message: 'No fratm l\' ho pippata tutta',
-                            status: 'received',
-                        },
-                        {
-                            date: '10/01/2020 16:15:22',
-                            message: 'Eh ma ziocane!',
-                            status: 'sent',
-                        }
-                    ]
                 }
             ]
         }

@@ -104,7 +104,8 @@
                         <!-- content messages row -->
                         <div class="content-row d-flex">
                             <div class="message" v-for="(singleMessage, indexMex) in contact.messages" :key="indexMex" :class="singleMessage.status"  v-if="contact.messages.length > 0" >
-                                <div class="dropdown" data-bs-toggle="dropdown" aria-expanded="false" v-text="singleMessage.message">
+                                <div class="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{singleMessage.message}}
                                     <span v-text="singleMessage.date.slice(11, 16)"></span>
                                 </div>
                                 <!-- toggle menu message -->

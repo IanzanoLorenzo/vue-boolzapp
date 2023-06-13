@@ -13,25 +13,76 @@
     <div id="app">
         <div class="my-container">
             <div class="row-container" style="height: 100%;">
-                <!-- parte sinistra -->
+                <!-- left section -->
                 <div class="col-4" style="height: 100%;">
-                    <div class="head-row"></div>
-                    <div class="notify-row"></div>
-                    <div class="input-row"></div>
+                    <!-- head row -->
+                    <div class="head-row d-flex align-items-center justify-content-between">
+                        <div class="col-auto d-flex align-items-center">
+                            <img src="./img/avatar_io.jpg" alt="foto profilo" class="propic">
+                            <h5 class="mb-0 ms-2">Sofia</h5>
+                        </div>
+                        <div class="col-auto fs-4">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <i class="fa-solid fa-message ms-4"></i>
+                            <i class="fa-solid fa-ellipsis-vertical mx-4"></i>
+                        </div>
+                    </div>
+                    <!-- notify row -->
+                    <div class="notify-row d-flex align-items-center">
+                        <i class="col-auto fa-solid fa-bell-slash notify-i fs-5 d-flex align-items-center justify-content-center mx-3"></i>
+                        <div class="col">
+                            <h6 class="fw-semibold">Ricevi notifiche di nuovi messaggi</h6>
+                            <p class="m-0">attiva notifiche desktop</p>
+                        </div>
+                    </div>
+                    <!-- input row -->
+                    <div class="input-row input-group">
+                        <i class="fa-solid fa-magnifying-glass input-group-text d-flex align-items-center px-4" id="inputGroup-sizing-default"></i>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="searchFilter" @keyup="searchChat">
+                    </div>
+                    <!-- chats row -->
                     <div class="chats-row">
-                        
+                        <div v-for="(contact, index) in contacts" @click="setActiveChat(index)" v-show="contact.visible">
+                            <div :class="index === activeChat ? 'active' : ''" class="chat-preview d-flex justify-content-between p-2" >
+                                <div class="col-10 d-flex align-items-center">
+                                    <img :src="contact.avatar" alt="" class="propic me-3 ms-0">
+                                    <div class="dati-mex">
+                                        <h5 class="mb-1" v-text="contact.name"></h5>
+                                        <p class="m-0 last-mex" v-text="contact.messages[contact.messages.length - 1].message"></p>
+                                    </div>
+                                </div>
+                                <div class="orario-preview col-1">
+                                    12:00
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- parte destra -->
-                <div class="col-8" style="height: 100%;">
-                    <div class="head-row">
+                <!-- end left section -->
+                <!-- right section -->
+                <div class="col-8" v-for="(contact, index) in contacts" :key="index" style="height: 100%;" v-show="index === activeChat">
+                    <div class="head-row d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img :src="contact.avatar" alt="" class="propic">
+                            <div>
+                                <h5 class="mb-1" v-text="contact.name"></h5>
+                                <p class="m-0 last-mex" v-text="`Ultimo accesso oggi2 ${contact.messages[contact.messages.length - 1].date}`"></p>
+                            </div>
+                        </div>
+                        <div class="fs-4" >
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip ms-4"></i>
+                            <i class="fa-solid fa-ellipsis-vertical mx-4"></i>
+                        </div>
+                    </div>
+                    <div class="content-row d-flex">
+                        <div :class="singleMessage.status" class="message" v-for="(singleMessage, indexMex) in contact.messages">{{singleMessage.message}}</div>
+                    </div>
+                    <div class="new-message-row">
 
                     </div>
-                    <div class="content-row">
-
-                    </div>
-                    <div class="new-message-row"></div>
                 </div>
+                <!-- end right section -->
             </div>
         </div>
     </div>

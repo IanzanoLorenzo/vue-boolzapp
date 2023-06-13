@@ -5,6 +5,8 @@ const {createApp} = Vue;
 createApp({
     data() {
         return {
+            searchFilter: '',
+            activeChat : 0,
             contacts: [
                 {
                     name: 'Michele',
@@ -171,6 +173,19 @@ createApp({
         }
     },
     methods: {
-        
+        setActiveChat(index){
+            this.activeChat = index
+        },
+        searchChat(){
+            for(let i = 0; i < this.contacts.length; i++){
+                let contact = this.contacts[i]
+                let contactName = contact.name.toLowerCase()
+                if(contactName.includes(this.searchFilter.toLowerCase())){
+                    contact.visible = true
+                } else{
+                    contact.visible = false
+                }
+            }
+        }
     },
 }).mount('#app')

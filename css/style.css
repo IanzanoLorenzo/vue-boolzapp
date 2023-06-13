@@ -135,21 +135,39 @@ body{
     background-color: #f3eeea
 }
 
+.new-message-row i{
+    color: #6b7376;
+    margin: 0 30px;
+    font-size: 20px;
+    z-index: 10;
+}
+
 .content-row{
     height: calc(100% - 140px);
     width: 100%;
     background-image: url(../img/mine.jpg);
     flex-direction: column;
     padding: 20px;
+    overflow: auto;
 }
 
     /* content row message */
 
     .message{
-        padding: 10px 20px;
+        padding: 10px 40px 10px 20px;
         margin-bottom: 20px;
         border-radius: 7px;
+        position: relative;
+        min-width: 200px;
+        max-width: 300px;
     }
+
+        .message span{
+            font-size: 10px;
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+        }
 
     .received{
         align-self: self-start;

@@ -6,6 +6,7 @@ createApp({
     data() {
         return {
             searchFilter: '',
+            newMessage : '',
             activeChat : 0,
             contacts: [
                 {
@@ -185,6 +186,45 @@ createApp({
                 } else{
                     contact.visible = false
                 }
+            }
+        },
+        dataSetted(){
+            let data = new Date();
+            let myDate = {
+                year : data.getFullYear(),
+                month : data.getMonth(),
+                day : data.getDate(),
+                hour : data.getHours(),
+                minute : data.getMinutes(),
+                second : data.getSeconds()
+            }
+            for(let element in myDate){
+                if(myDate[element] <= 9){
+                    myDate[element] = '0' + myDate[element];
+                }
+            }
+
+            return myDate
+        },
+        addNewMessage(){
+            if(this.newMessage !== ''){
+                const msgDate = this.dataSetted();
+                let obj = {
+                    date:`${msgDate.day}/${msgDate.month}/${msgDate.year} ${msgDate.hour}:${msgDate.minute}:${msgDate.second}`,
+                    message: this.newMessage.trim(),
+                    status: 'sent'
+                }
+                this.contacts[this.activeChat].messages.push(obj);
+                this.newMessage = '';
+                setTimeout(() => {
+                    const respMsgDate = this.dataSetted();
+                    let objResp = {
+                        date:`${respMsgDate.day}/${respMsgDate.month}/${respMsgDate.year} ${respMsgDate.hour}:${respMsgDate.minute}:${respMsgDate.second}`,
+                        message: 'Ok!',
+                        status: 'received'
+                    }
+                    this.contacts[this.activeChat].messages.push(objResp);
+                }, 1000)
             }
         }
     },

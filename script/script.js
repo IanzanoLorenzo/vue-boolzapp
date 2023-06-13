@@ -253,7 +253,6 @@ createApp({
             }
         },
         deleteMessage(contact, indexMex){
-            console.log(indexMex)
             contact.messages.splice(indexMex, 1); 
         }
     }

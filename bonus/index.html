@@ -15,7 +15,7 @@
 
     <div id="splashpage">
         <div id="applicazione">
-            <div class="container">
+            <div class="container-fluid container-lg">
                 <h1>BENVENUTO SU BOOLZAPP</h1>
                 <div id="barra-caricamento">
                     <div id="barra-progresso">
@@ -29,7 +29,7 @@
 
     <div id="app">
         <div id="applicazione">
-            <div class="container">
+            <div class="container-fluid container-lg">
                 <div class="row-container" style="height: 100%;">
 
 
@@ -74,8 +74,8 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <img :src="contact.avatar" alt="" class="propic me-3 ms-0">
                                         <div class="dati-mex">
-                                            <h5 class="mb-1" v-text="contact.name"></h5>
-                                            <p v-if="!contact.writingControl.writing" class="m-0 last-mex" v-text="contact.messages.length > 0 ? contact.messages[contact.messages.length - 1].message : 'Nessun messaggio'"></p>
+                                            <h5 class="mb-1 text-tron" v-text="contact.name"></h5>
+                                            <p v-if="!contact.writingControl.writing" class="m-0 last-mex text-tron" v-text="contact.messages.length > 0 ? contact.messages[contact.messages.length - 1].message : 'Nessun messaggio'"></p>
                                             <p v-else class="m-0 last-mex" v-text="writingMex"></p>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="welcome-page d-flex align-items-center justify-content-center">                            
                             <h2 class="text-center">BENVENUTO SU BOOLZAPP</h2>
-                            <p>Clicca sul <i class="fa-solid fa-plus"></i> in alto a destra per creare una nuova chat oppure su una chat qui a sinistra per aprirla.</p>
+                            <p class="text-center">Clicca sul <i class="fa-solid fa-plus"></i> in alto a destra per creare una nuova chat oppure su una chat qui a sinistra per aprirla.</p>
                         </div>
                     </div>
 

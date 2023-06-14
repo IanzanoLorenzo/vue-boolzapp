@@ -4,8 +4,6 @@ const splashPage = document.getElementById('splashpage')
 const caricamentoPage = document.getElementById('barra-progresso')
 const {createApp} = Vue;
 
-caricamentoPage.classList.add('carica')
-
 setTimeout (()=> {
     splashPage.innerHTML = '';
     createApp({
@@ -22,7 +20,7 @@ setTimeout (()=> {
             writingMex: '',
             searchFilter: '',
             newMessage : '',
-            activeChat : false,
+            activeChat : null,
             descr: '',
             nomeNuovaChat : '',
             nuovaChatInput : false,
@@ -304,14 +302,11 @@ setTimeout (()=> {
             return Math.floor(Math.random() * (max - min + 1) + min);
         },
         toWelcomePage(){
-            this.activeChat = false
+            this.activeChat = null;
         },
         deleteChat(){
-            let sicurezza = prompt('Scrivi "S" per confermare').toLowerCase()
-            if(sicurezza === 's'){ 
-                this.contacts.splice(this.activeChat, 1)
-                this.activeChat = false
-            }
+            this.contacts.splice(this.activeChat, 1)
+            this.activeChat = null
         },
         addChat(){
             let obj = {
@@ -333,4 +328,4 @@ setTimeout (()=> {
             this.nuovaChatInput = !this.nuovaChatInput;
         }
     }
-}).mount('#app')},6000)
+}).mount('#app')},100)

@@ -229,9 +229,6 @@ createApp({
                     this.contacts[this.activeChat].messages.push(objResp);
                 }, 1000)
             }
-        },
-        deleteMessage(contact, indexMex){
-            contact.messages.splice(indexMex, 1); 
         }
     }
 }).mount('#app')

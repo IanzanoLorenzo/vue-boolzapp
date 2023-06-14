@@ -25,8 +25,8 @@ body{
     background-color: #ffffff;
     height: 100%;
     max-height: 870px;
-    width: 1300px;
     margin: 0 auto;
+    padding: 0;
     box-shadow: black 0 0 20px 0;
 }
 
@@ -163,6 +163,7 @@ body{
         margin-bottom: 20px;
         border-radius: 7px;
         position: relative;
+        box-shadow: 5px 5px 5px -5px black;
     }
 
         .message span{
@@ -183,6 +184,11 @@ body{
             }
 
             /* toggle menu */
+
+            .dropdown-menu{
+                box-shadow: 5px 5px 5px -5px black;
+                border-radius: 5px;
+            }
         
             .dropdown-menu ul{
                 list-style: none;

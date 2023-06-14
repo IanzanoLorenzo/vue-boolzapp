@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <title>Bootzapp</title>
 </head>
 <body>
     <div id="app">
         <div id="applicazione">
-            <div class="my-container">
+            <div class="my-container container">
                 <div class="row-container" style="height: 100%;">
 
 
 
-                    <!-- left section -->
+                    <!-- ************************* -->
+                        <!-- left section -->
+                    <!-- ************************* -->
                     <div class="col-4" style="height: 100%;">
-
-
 
                         <!-- head row -->
                         <div class="head-row d-flex align-items-center justify-content-between">
@@ -35,8 +35,6 @@
                             </div>
                         </div>
 
-
-
                         <!-- notify row -->
                         <div class="notify-row d-flex align-items-center">
                             <i class="col-auto fa-solid fa-bell-slash notify-i fs-5 d-flex align-items-center justify-content-center mx-3"></i>
@@ -46,15 +44,11 @@
                             </div>
                         </div>
 
-
-
                         <!-- searching row -->
                         <div class="searching-row input-group">
                             <i class="fa-solid fa-magnifying-glass input-group-text d-flex align-items-center px-4" id="inputGroup-sizing-default"></i>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="searchFilter" @keyup="searchChat">
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="searchFilter" @input="searchChat">
                         </div>
-
-
 
                         <!-- chats row -->
                         <div class="chats-row">
@@ -64,11 +58,10 @@
                                         <img :src="contact.avatar" alt="" class="propic me-3 ms-0">
                                         <div class="dati-mex">
                                             <h5 class="mb-1" v-text="contact.name"></h5>
-                                            <p class="m-0 last-mex" v-text="contact.messages.length > 0 ? contact.messages[contact.messages.length - 1].message : 'Nessun messaggio'"></p>
+                                            <p class="m-0 last-mex">Ultimo messaggio</p>
                                         </div>
                                     </div>
-                                    <div class="orario-preview col-1" v-text="contact.messages.length > 0 ? `${contact.messages[contact.messages.length - 1].date.slice(11, 16)}` : ''">
-                                    </div>
+                                    <div class="orario-preview col-1">12:00</div>
                                 </div>
                             </div>
                         </div>
@@ -77,11 +70,10 @@
 
 
 
-                    <!-- right section -->
+                    <!-- ************************* -->
+                        <!-- right section -->
+                    <!-- ************************* -->
                     <div class="col-8" v-for="(contact, indexContacts) in contacts" :key="indexContacts" style="height: 100%;" v-show="indexContacts === activeChat">
-
-
-
 
                         <!-- head row 2 -->
                         <div class="head-row d-flex align-items-center justify-content-between">
@@ -99,8 +91,6 @@
                             </div>
                         </div>
 
-
-
                         <!-- content messages row -->
                         <div class="content-row d-flex">
                             <div class="message" v-for="(singleMessage, indexMex) in contact.messages" :key="indexMex" :class="singleMessage.status"  v-if="contact.messages.length > 0" >
@@ -112,13 +102,11 @@
                                 <div class="dropdown-menu">
                                     <ul>
                                         <li class="dropdown-item">Informazioni</li>
-                                        <li class="dropdown-item" @click="deleteMessage(contact, indexMex)">Elimina messaggio</li>
+                                        <li class="dropdown-item">Elimina messaggio</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-
 
                         <!-- new message row -->
                         <div class="new-message-row d-flex align-items-center">
@@ -128,8 +116,7 @@
                         </div>
                     </div>
                     <!-- end right section -->
-
-                    
+                   
                 </div>
             </div>
         </div>

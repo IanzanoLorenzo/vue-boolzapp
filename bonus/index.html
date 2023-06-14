@@ -7,12 +7,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
-    <title>Bonus Bootzapp</title>
+    <title>Bonus Boolzapp</title>
 </head>
 <body>
+
+<!-- SPLASH PAGE -->
+
+    <div id="splashpage">
+        <div id="applicazione">
+            <div class="container">
+                <h1>BENVENUTO SU BOOLZAPP</h1>
+                <div id="barra-caricamento">
+                    <div id="barra-progresso">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- APPLICAZIONE -->
+
     <div id="app">
         <div id="applicazione">
-            <div class="my-container container">
+            <div class="container">
                 <div class="row-container" style="height: 100%;">
 
 
@@ -53,12 +70,13 @@
                         <!-- chats row -->
                         <div class="chats-row">
                             <div v-for="(contact, indexContacts) in contacts":key="indexContacts" @click="setActiveChat(indexContacts)" v-show="contact.visible">
-                                <div :class="indexContacts === activeChat ? 'active' : ''" class="chat-preview d-flex justify-content-between p-2" >
+                                <div :class="indexContacts === activeChat ? 'active' : ''" class="chat-preview d-flex justify-content-between p-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <img :src="contact.avatar" alt="" class="propic me-3 ms-0">
                                         <div class="dati-mex">
                                             <h5 class="mb-1" v-text="contact.name"></h5>
-                                            <p class="m-0 last-mex" v-text="contact.messages.length > 0 ? contact.messages[contact.messages.length - 1].message : 'Nessun messaggio'"></p>
+                                            <p v-if="!contact.writingControl.writing" class="m-0 last-mex" v-text="contact.messages.length > 0 ? contact.messages[contact.messages.length - 1].message : 'Nessun messaggio'"></p>
+                                            <p v-else class="m-0 last-mex" v-text="writingMex"></p>
                                         </div>
                                     </div>
                                     <div class="orario-preview col-1" v-text="contact.messages.length > 0 ? `${contact.messages[contact.messages.length - 1].date.slice(11, 16)}` : ''">
@@ -74,21 +92,46 @@
                     <!-- ************************* -->
                         <!-- right section -->
                     <!-- ************************* -->
-                    <div class="col-8" v-for="(contact, indexContacts) in contacts" :key="indexContacts" style="height: 100%;" v-show="indexContacts === activeChat">
+                    <div class="col-8 right-section" v-if="activeChat === false">
+                        <div class="head-row d-flex align-items-center justify-content-end">
+                            <input class="form-control" v-if="nuovaChatInput" type="text" v-model="nomeNuovaChat" @keyup.enter="addChat()" style="max-width: 300px;">
+                            <div>
+                                <i class="fa-solid fa-magnifying-glass btn fs-4"></i>
+                                <i class="fa-solid fa-plus btn fs-4" @click="activeNeWChatInput()"></i>
+                                <i class="fa-solid fa-ellipsis-vertical me-3 btn fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="welcome-page d-flex align-items-center justify-content-center">                            
+                            <h2 class="text-center">BENVENUTO SU BOOLZAPP</h2>
+                            <p>Clicca sul <i class="fa-solid fa-plus"></i> in alto a destra per creare una nuova chat oppure su una chat qui a sinistra per aprirla.</p>
+                        </div>
+                    </div>
+
+
+                    <div v-else class="col-8 right-section" v-for="(contact, indexContacts) in contacts" :key="indexContacts" style="height: 100%;" v-show="indexContacts === activeChat">
+
 
                         <!-- head row 2 -->
                         <div class="head-row d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
-                                <img :src="contact.avatar" alt="" class="propic">
+                                <i class="fa-solid fa-arrow-left btn" @click="toWelcomePage()"></i>
+                                <img :src="contact.avatar" alt="" class="propic ms-0">
                                 <div>
                                     <h5 class="mb-1" v-text="contact.name"></h5>
-                                    <p class="m-0 last-mex" v-text="contact.messages.length > 0 ? `Ultimo accesso oggi ${contact.messages[contact.messages.length - 1].date}` : 'Ultimo accesso oggi'"></p>
+                                    <p v-if="!contact.writingControl.online" class="m-0 last-mex" v-text="contact.messages.length > 0 ? `Ultimo accesso oggi ${contact.messages[contact.messages.length - 1].date}` : 'Ultimo accesso oggi'"></p>
+                                    <p v-else class="m-0 last-mex" v-text="writingMex"></p>
                                 </div>
                             </div>
                             <div class="fs-4" >
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <i class="fa-solid fa-paperclip ms-4"></i>
-                                <i class="fa-solid fa-ellipsis-vertical mx-4"></i>
+                                <i class="fa-solid fa-magnifying-glass btn fs-4"></i>
+                                <i class="fa-solid fa-paperclip btn fs-4"></i>
+                                <div class="dropdown d-inline p-0" >
+                                    <i class="fa-solid fa-ellipsis-vertical me-4 btn fs-4 px-3" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">Informazioni chat</li>
+                                        <li class="dropdown-item" @click="deleteChat()">Elimina chat</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -114,7 +157,7 @@
                             <i class="fa-regular fa-face-smile"></i>
                             <input type="text" class="form-control" v-model="newMessage" @keyup.enter="addNewMessage">
                             <i v-if="newMessage === ''" class="fa-solid fa-microphone"></i>
-                            <i v-else class="fa-solid fa-paper-plane" @click="addNewMessage"></i>
+                            <i v-else class="fa-solid fa-paper-plane btn mx-3" @click="addNewMessage"></i>
                         </div>
                     </div>
                     <!-- end right section -->

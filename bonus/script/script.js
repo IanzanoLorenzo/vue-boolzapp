@@ -1,8 +1,14 @@
 "use strict";
 
+const splashPage = document.getElementById('splashpage')
+const caricamentoPage = document.getElementById('barra-progresso')
 const {createApp} = Vue;
 
-createApp({
+caricamentoPage.classList.add('carica')
+
+setTimeout (()=> {
+    splashPage.innerHTML = '';
+    createApp({
     data() {
         return {
             risposte:[
@@ -13,14 +19,22 @@ createApp({
                 'Davvero?'
             ],
             activeToggle : 0,
+            writingMex: '',
             searchFilter: '',
             newMessage : '',
-            activeChat : 0,
+            activeChat : false,
+            descr: '',
+            nomeNuovaChat : '',
+            nuovaChatInput : false,
             contacts: [
                 {
                     name: 'Michele',
                     avatar: './img/avatar_1.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -43,6 +57,10 @@ createApp({
                     name: 'Fabio',
                     avatar: './img/avatar_2.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -65,6 +83,10 @@ createApp({
                     name: 'Samuele',
                     avatar: './img/avatar_3.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -87,6 +109,10 @@ createApp({
                     name: 'Alessandro B.',
                     avatar: './img/avatar_4.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -104,6 +130,10 @@ createApp({
                     name: 'Alessandro L.',
                     avatar: './img/avatar_5.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -121,6 +151,10 @@ createApp({
                     name: 'Claudia',
                     avatar: './img/avatar_5.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -143,6 +177,10 @@ createApp({
                     name: 'Federico',
                     avatar: './img/avatar_7.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -160,6 +198,10 @@ createApp({
                     name: 'Davide',
                     avatar: './img/avatar_8.jpg',
                     visible: true,
+                    writingControl:{
+                        writing: false,
+                        online: false
+                    },
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -224,7 +266,19 @@ createApp({
                     toggleMenu : false
                 }
                 this.contacts[this.activeChat].messages.push(obj);
+                this.contacts[this.activeChat].writingControl.writing = true;
+                this.contacts[this.activeChat].writingControl.online = true;
                 this.newMessage = '';
+                this.writingMex = 'Sta scrivendo'
+                let counter = 0;
+                let scrivendo = setInterval(() =>{
+                    this.writingMex += '.'
+                    counter++
+                    if(counter > 3){
+                        this.writingMex = 'Sta scrivendo'
+                        counter = 0
+                    }
+                },250)
                 setTimeout(() => {
                     const respMsgDate = this.dataSetted();
                     let objResp = {
@@ -234,7 +288,13 @@ createApp({
                         toggleMenu : false
                     }
                     this.contacts[this.activeChat].messages.push(objResp);
-                }, 1000)
+                    this.contacts[this.activeChat].writingControl.writing = false;
+                    clearInterval(scrivendo)
+                    this.writingMex = 'Online'               
+                }, 3000)
+                setTimeout(()=> {
+                    this.contacts[this.activeChat].writingControl.online = false;
+                },5000)
             }
         },
         deleteMessage(contact, indexMex){
@@ -242,6 +302,35 @@ createApp({
         },
         randomNum(min,max){ 
             return Math.floor(Math.random() * (max - min + 1) + min);
+        },
+        toWelcomePage(){
+            this.activeChat = false
+        },
+        deleteChat(){
+            let sicurezza = prompt('Scrivi "S" per confermare').toLowerCase()
+            if(sicurezza === 's'){ 
+                this.contacts.splice(this.activeChat, 1)
+                this.activeChat = false
+            }
+        },
+        addChat(){
+            let obj = {
+                name: this.nomeNuovaChat,
+                avatar: `./img/avatar_${this.randomNum(1, 8)}.jpg`,
+                visible: true,
+                writingControl:{
+                    writing: false,
+                    online: false
+                },
+                messages: [],
+            };
+            this.contacts.push(obj);
+            this.nomeNuovaChat = ''
+            this.nuovaChatInput = false;
+            this.activeChat = this.contacts.length - 1
+        },
+        activeNeWChatInput(){
+            this.nuovaChatInput = !this.nuovaChatInput;
         }
     }
-}).mount('#app')
+}).mount('#app')},6000)

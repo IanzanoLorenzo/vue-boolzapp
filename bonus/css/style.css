@@ -8,26 +8,75 @@ body{
     font-family: sans-serif;
 }
 
+
+.removed{
+    display: none;
+}
+
+#splashpage .container{
+    background-color: #009688;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1{
+    color: white;
+    font-weight: 800;
+}
+
+#barra-caricamento{
+    width: 50%;
+    height: 10px;
+    padding: 2px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#barra-progresso{
+    width: 10%;
+    border-radius: 4px;
+    height: 100%;
+    background-color: #007065;
+    transition: all 5s ease-in-out;
+}
+
+#barra-progresso.carica{
+    width: 100%;
+}
+
 /* page */
 
 #applicazione{
     height: 100vh;
     width: 100vw;
     background: linear-gradient(180deg, #009688,12vh ,#009688, 12vh, #dadbd2);
-    padding: 30px 0 0 0;
+    padding: 30px 0;
 }
 
 body{
     overflow: hidden;
 }
 
-.my-container{
+.container{
     background-color: #ffffff;
     height: 100%;
     max-height: 870px;
     margin: 0 auto;
     padding: 0;
     box-shadow: black 0 0 20px 0;
+}
+
+.right-section{
+    border-left: 1px gray solid;
+}
+
+.welcome-page{
+    background-color: #00bdaa;
+    height: calc(100% - 80px);
+    color: whitesmoke;
+    flex-direction: column;
 }
 
 /* rows layout */
@@ -110,6 +159,7 @@ body{
 
     .chat-preview{
         border-top: #cccccc 1px solid;
+        cursor: pointer;
     }
 
     .last-mex{
@@ -141,7 +191,7 @@ body{
 
     .new-message-row i{
         color: #6b7376;
-        margin: 0 30px;
+        margin: 0 31.5px;
         font-size: 20px;
         z-index: 10;
     }

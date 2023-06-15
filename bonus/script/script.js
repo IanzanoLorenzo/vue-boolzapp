@@ -255,6 +255,7 @@ setTimeout (()=> {
             return myDate;
         },
         addNewMessage(){
+            const chatFocus = this.activeChat;
             if(this.newMessage !== ''){
                 const msgDate = this.dataSetted();
                 let obj = {
@@ -263,9 +264,9 @@ setTimeout (()=> {
                     status: 'sent',
                     toggleMenu : false
                 }
-                this.contacts[this.activeChat].messages.push(obj);
-                this.contacts[this.activeChat].writingControl.writing = true;
-                this.contacts[this.activeChat].writingControl.online = true;
+                this.contacts[chatFocus].messages.push(obj);
+                this.contacts[chatFocus].writingControl.writing = true;
+                this.contacts[chatFocus].writingControl.online = true;
                 this.newMessage = '';
                 this.writingMex = 'Sta scrivendo'
                 let counter = 0;
@@ -285,13 +286,13 @@ setTimeout (()=> {
                         status: 'received',
                         toggleMenu : false
                     }
-                    this.contacts[this.activeChat].messages.push(objResp);
-                    this.contacts[this.activeChat].writingControl.writing = false;
+                    this.contacts[chatFocus].messages.push(objResp);
+                    this.contacts[chatFocus].writingControl.writing = false;
                     clearInterval(scrivendo)
                     this.writingMex = 'Online'               
                 }, 3000)
                 setTimeout(()=> {
-                    this.contacts[this.activeChat].writingControl.online = false;
+                    this.contacts[chatFocus].writingControl.online = false;
                 },5000)
             }
         },

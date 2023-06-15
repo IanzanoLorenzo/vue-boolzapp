@@ -328,4 +328,4 @@ setTimeout (()=> {
             this.nuovaChatInput = !this.nuovaChatInput;
         }
     }
-}).mount('#app')},100)
+}).mount('#app')},5000)

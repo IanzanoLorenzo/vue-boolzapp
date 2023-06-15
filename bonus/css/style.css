@@ -29,9 +29,9 @@ h1{
 #barra-caricamento{
     width: 50%;
     height: 10px;
-    padding: 2px;
+    padding: 3px;
     border-radius: 5px;
-    background-color: white;
+    background-color: #007065;
 }
 
 @keyframes caricamentoBarra{
@@ -46,8 +46,17 @@ h1{
     border-radius: 4px;
     width: 100%;
     height: 100%;
-    background-color: #007065;
+    background-color: white;
     animation: caricamentoBarra 5s linear;
+}
+
+@keyframes caricamentoSpinner{
+    0%{transform: rotate(0);}
+    100%{transform: rotate(360deg);}
+}
+
+#spinner{
+    animation: caricamentoSpinner infinite 1s linear ;
 }
 
 /* page */

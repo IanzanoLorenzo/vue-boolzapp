@@ -189,7 +189,7 @@
                         <!-- new message row -->
                         <div class="new-message-row d-flex align-items-center">
                             <i class="fa-regular fa-face-smile"></i>
-                            <input type="text" class="form-control" v-model="newMessage" @keyup.enter="addNewMessage">
+                            <input type="text" class="form-control" v-model="newMessage" @keyup.enter="addNewMessage(indexContacts)">
                             <i v-if="newMessage === ''" class="fa-solid fa-microphone"></i>
                             <i v-else class="fa-solid fa-paper-plane btn mx-3" @click="addNewMessage"></i>
                         </div>

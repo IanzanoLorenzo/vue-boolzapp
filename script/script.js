@@ -207,8 +207,7 @@ createApp({
 
             return myDate;
         },
-        addNewMessage(){
-            const chatFocus = this.activeChat;
+        addNewMessage(index){
             if(this.newMessage !== ''){
                 const msgDate = this.dataSetted();
                 let obj = {
@@ -217,7 +216,7 @@ createApp({
                     status: 'sent',
                     toggleMenu : false
                 }
-                this.contacts[chatFocus].messages.push(obj);
+                this.contacts[parseInt(index)].messages.push(obj);
                 this.newMessage = '';
                 setTimeout(() => {
                     const respMsgDate = this.dataSetted();
@@ -227,7 +226,7 @@ createApp({
                         status: 'received',
                         toggleMenu : false
                     }
-                    this.contacts[chatFocus].messages.push(objResp);
+                    this.contacts[parseInt(index)].messages.push(objResp);
                 }, 1000)
             }
         }
